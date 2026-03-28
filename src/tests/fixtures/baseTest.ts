@@ -14,7 +14,7 @@ type BaseTestFixtures = {
 export const test = base.extend<BaseTestFixtures>({
     mainPage:
         async ({ browser }, use) => {
-            const browserContext = await browser.newContext()
+            const browserContext = await browser.newContext({storageState: 'storageState.json'})
             const newPage = await browserContext.newPage()
             await newPage.goto("/", {
                 timeout: 120000,

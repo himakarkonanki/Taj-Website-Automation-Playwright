@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { testConfiguration } from './testConfig';
 
 export default defineConfig({
+  globalSetup: './globalSetup.ts',
   testDir: './src/tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -16,14 +17,14 @@ export default defineConfig({
     baseURL: testConfiguration.websiteURL,
     screenshot:'on',
     permissions:['geolocation'],
+    storageState:'storageState.json'
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome']},
-      
+      use: { ...devices['Desktop Chrome'],storageState:'storageState.json'}   
     },
 
     // {
